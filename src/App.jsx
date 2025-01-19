@@ -1,30 +1,20 @@
-import { useState } from 'react';
-import { AppLayout } from './AppLayout';
+import styles from './app.module.css';
+import { Field } from './components/field/Field';
+import { Information } from './components/information/Information';
+import { store } from './store';
 
 export const App = () => {
-	const [currentPlayer, setCurrentPlayer] = useState('X');
-	const [isGameEnded, setIsGameEnded] = useState(false);
-	const [isDraw, setIsDraw] = useState(false);
-	const [field, setField] = useState(['', '', '', '', '', '', '', '', '']);
-
 	const restartGame = () => {
-		setCurrentPlayer('X');
-		setIsGameEnded(false);
-		setIsDraw(false);
-		setField(['', '', '', '', '', '', '', '', '']);
+		store.dispatch({ type: 'RESTART_GAME' });
 	};
 
-	const gameState = {
-		currentPlayer,
-		setCurrentPlayer,
-		isGameEnded,
-		setIsGameEnded,
-		isDraw,
-		setIsDraw,
-		field,
-		setField,
-		restartGame,
-	};
-
-	return <AppLayout gameState={gameState} />;
+	return (
+		<div className={styles.app}>
+			<Information />
+			<Field />
+			<button className={styles.restart} onClick={restartGame}>
+				Начать заново
+			</button>
+		</div>
+	);
 };

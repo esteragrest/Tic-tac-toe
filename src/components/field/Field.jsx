@@ -1,23 +1,26 @@
+import { useState, useEffect } from 'react';
 import { FieldLayout } from './FieldLayout';
 import { WIN_PATTERNS } from '../../data';
-import PropTypes from 'prop-types';
+import { store } from '../../store';
 
-export const Field = ({
-	field,
-	setField,
-	currentPlayer,
-	setCurrentPlayer,
-	isGameEnded,
-	setIsGameEnded,
-	setIsDraw,
-}) => {
+export const Field = () => {
+	const [state, setState] = useState(store.getState());
+	const { field, currentPlayer, isGameEnded } = state;
+
+	useEffect(() => {
+		const unsubscribe = store.subscribe(() => {
+			setState(store.getState());
+		});
+		return () => unsubscribe();
+	}, []);
+
 	const handleCellClick = (index) => {
 		if (field[index] !== '' || isGameEnded) {
 			return;
 		}
 		const newField = [...field];
 		newField[index] = currentPlayer;
-		setField(newField);
+		store.dispatch({ type: 'SET_FIELD', payload: newField });
 		checkResult(newField);
 	};
 
@@ -25,25 +28,18 @@ export const Field = ({
 		for (let combo of WIN_PATTERNS) {
 			const [a, b, c] = combo;
 			if (field[a] && field[a] === field[b] && field[a] === field[c]) {
-				setIsGameEnded(true);
+				store.dispatch({ type: 'DECLARE_WINNER' });
 				return;
 			}
 		}
 		if (!field.includes('')) {
-			setIsDraw(true);
+			store.dispatch({ type: 'DECLARE_DRAW' });
 			return;
 		}
-		setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+		store.dispatch({
+			type: 'SET_CURRENT_PLAYER',
+			payload: currentPlayer === 'X' ? 'O' : 'X',
+		});
 	};
-	return <FieldLayout field={field} handleCellClick={handleCellClick} />;
-};
-
-Field.propTypes = {
-	currentPlayer: PropTypes.string,
-	setCurrentPlayer: PropTypes.func,
-	isGameEnded: PropTypes.bool,
-	setIsGameEnded: PropTypes.func,
-	setIsDraw: PropTypes.func,
-	field: PropTypes.array,
-	setField: PropTypes.func,
+	return <FieldLayout handleCellClick={handleCellClick} />;
 };

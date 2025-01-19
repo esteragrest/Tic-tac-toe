@@ -1,7 +1,10 @@
+import { store } from '../../store';
 import styles from './field.module.css';
 import PropTypes from 'prop-types';
 
-export const FieldLayout = ({ field, handleCellClick }) => {
+export const FieldLayout = ({ handleCellClick }) => {
+	const { field } = store.getState();
+
 	return (
 		<div className={styles.gameboard}>
 			{field.map((item, index) => {
@@ -21,6 +24,5 @@ export const FieldLayout = ({ field, handleCellClick }) => {
 };
 
 FieldLayout.propTypes = {
-	field: PropTypes.array,
 	handleCellClick: PropTypes.func,
 };
