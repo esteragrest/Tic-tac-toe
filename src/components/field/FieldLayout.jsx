@@ -1,9 +1,10 @@
-import { store } from '../../store';
 import styles from './field.module.css';
+import { useSelector } from 'react-redux';
+import { selectField } from '../../selectors';
 import PropTypes from 'prop-types';
 
 export const FieldLayout = ({ handleCellClick }) => {
-	const { field } = store.getState();
+	const field = useSelector(selectField);
 
 	return (
 		<div className={styles.gameboard}>

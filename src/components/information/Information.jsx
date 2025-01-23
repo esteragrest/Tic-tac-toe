@@ -1,17 +1,11 @@
-import { useState, useEffect } from 'react';
-import { store } from '../../store';
+import { useSelector } from 'react-redux';
+import { selectCurrentPlayer, selectIsDraw, selectIsGameEnded } from '../../selectors';
 import styles from './information.module.css';
 
 export const Information = () => {
-	const [state, setState] = useState(store.getState());
-	const { currentPlayer, isGameEnded, isDraw } = state;
-
-	useEffect(() => {
-		const unsubscribe = store.subscribe(() => {
-			setState(store.getState());
-		});
-		return () => unsubscribe();
-	}, []);
+	const currentPlayer = useSelector(selectCurrentPlayer);
+	const isGameEnded = useSelector(selectIsGameEnded);
+	const isDraw = useSelector(selectIsDraw);
 
 	const draw = <h2>Ничья!</h2>;
 	const playerVictory = <h2>Победа: {currentPlayer}</h2>;

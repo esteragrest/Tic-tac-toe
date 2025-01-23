@@ -1,11 +1,12 @@
+import { useDispatch } from 'react-redux';
 import styles from './app.module.css';
 import { Field } from './components/field/Field';
 import { Information } from './components/information/Information';
-import { store } from './store';
 
 export const App = () => {
+	const dispatch = useDispatch();
 	const restartGame = () => {
-		store.dispatch({ type: 'RESTART_GAME' });
+		dispatch({ type: 'RESTART_GAME' });
 	};
 
 	return (
