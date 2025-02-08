@@ -1,27 +1,10 @@
 import styles from './app.module.css';
-import { Field } from './components/field/Field';
-import { Information } from './components/information/Information';
+import { Field, Information } from './components';
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-// export const App = () => {
-// 	const dispatch = useDispatch();
-// 	const restartGame = () => {
-// 		dispatch({ type: 'RESTART_GAME' });
-// 	};
-
-// 	return (
-// 		<div className={styles.app}>
-// 			<Information />
-// 			<Field />
-// 			<button className={styles.restart} onClick={restartGame}>
-// 				Начать заново
-// 			</button>
-// 		</div>
-// 	);
-// };
-
-export class App extends Component {
+export class AppContainer extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -43,6 +26,8 @@ export class App extends Component {
 	}
 }
 
-App.propTypes = {
-	dispatch: PropTypes.array,
+AppContainer.propTypes = {
+	dispatch: PropTypes.func,
 };
+
+export const App = connect()(AppContainer);
