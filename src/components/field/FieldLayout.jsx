@@ -1,4 +1,3 @@
-import styles from './field.module.css';
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { connect } from 'react-redux';
@@ -11,9 +10,9 @@ export class FieldLayoutContainer extends Component {
 	render() {
 		const { field, handleCellClick } = this.props;
 		return (
-			<div className={styles.gameboard}>
+			<div className="gameboard">
 				{field.map((item, index) => {
-					const cellClass = `${styles.cell} ${item === 'X' ? styles.cross : styles.zero}`;
+					const cellClass = `cell ${item === 'X' ? 'text-sky-900' : 'text-sky-400'}`;
 					return (
 						<div
 							className={cellClass}

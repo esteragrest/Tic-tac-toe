@@ -1,6 +1,6 @@
 import { FieldLayout } from './FieldLayout';
 import { WIN_PATTERNS } from '../../data';
-import { DECLARE_WINNER, setCurrentPlayer, DECLARE_DRAW, setField } from '../../actions';
+import { setCurrentPlayer, setField, ACTION_TYPES } from '../../actions';
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -27,12 +27,12 @@ export class FieldContainer extends Component {
 		for (let combo of WIN_PATTERNS) {
 			const [a, b, c] = combo;
 			if (field[a] && field[a] === field[b] && field[a] === field[c]) {
-				dispatch(DECLARE_WINNER);
+				dispatch({ type: ACTION_TYPES.DECLARE_WINNER });
 				return;
 			}
 		}
 		if (!field.includes('')) {
-			dispatch(DECLARE_DRAW);
+			dispatch({ type: ACTION_TYPES.DECLARE_DRAW });
 			return;
 		}
 		dispatch(setCurrentPlayer(currentPlayer));

@@ -1,6 +1,8 @@
+import { ACTION_TYPES } from './action-types';
+
 export const setCurrentPlayer = (currentPlayer) => {
 	return {
-		type: 'SET_CURRENT_PLAYER',
+		type: ACTION_TYPES.SET_CURRENT_PLAYER,
 		payload: currentPlayer === 'X' ? 'O' : 'X',
 	};
 };

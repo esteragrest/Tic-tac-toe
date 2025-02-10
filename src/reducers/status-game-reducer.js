@@ -1,3 +1,5 @@
+import { ACTION_TYPES } from '../actions';
+
 export const initialGameStatusState = {
 	isGameEnded: false,
 	isDraw: false,
@@ -6,12 +8,11 @@ export const initialGameStatusState = {
 export const gameStatusReducer = (state = initialGameStatusState, action) => {
 	const { type } = action;
 	switch (type) {
-		case 'DECLARE_WINNER':
+		case ACTION_TYPES.DECLARE_WINNER:
 			return { ...state, isGameEnded: true };
-		case 'DECLARE_DRAW':
-			//если проблема с помедами и ничьей, убирать здесь
+		case ACTION_TYPES.DECLARE_DRAW:
 			return { ...state, isGameEnded: true, isDraw: true };
-		case 'RESTART_GAME':
+		case ACTION_TYPES.RESTART_GAME:
 			return initialGameStatusState;
 		default:
 			return state;

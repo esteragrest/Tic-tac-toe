@@ -1,3 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.gameboard {
+		@apply grid;
+		@apply grid-cols-3;
+		gap: 7px;
+		margin: 20px auto;
+		width: auto;
+		height: auto;
+	}
+
+	.cell {
+		@apply flex;
+		@apply justify-center;
+		@apply items-center;
+		@apply w-32;
+		@apply h-32;
+		@apply bg-cyan-200;
+		border: 2px solid #83c3d2;
+		cursor: pointer;
+		user-select: none;
+		@apply text-[100px];
+
+		&:hover {
+			background-color: #6ab9c9;
+		}
+	}
+}
+
 :root {
 	--accent-color-hue: 236;
 	--accent-color-saturation: 100%;

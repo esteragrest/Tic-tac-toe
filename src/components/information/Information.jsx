@@ -1,5 +1,4 @@
 import { selectCurrentPlayer, selectIsDraw, selectIsGameEnded } from '../../selectors';
-import styles from './information.module.css';
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -16,7 +15,7 @@ export class InformationContainer extends Component {
 		const playerMove = <h2>Ходит: {currentPlayer}</h2>;
 
 		return (
-			<div className={styles.statusgame}>
+			<div className="text-center text-white text-[24px] m-3">
 				{isDraw
 					? draw
 					: isDraw === false && isGameEnded
